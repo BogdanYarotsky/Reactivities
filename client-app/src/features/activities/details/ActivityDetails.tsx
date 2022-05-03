@@ -1,24 +1,30 @@
 import React from "react";
-import { Image, Card, Icon } from "semantic-ui-react";
+import { Image, Card, Icon, Button } from "semantic-ui-react";
+import { Activity } from "../../../app/models/activity";
 
-export default function ActivityDetails() {
+interface Props {
+  activity : Activity;
+  cancelSelectActivity: () => void;
+}
+
+export default function ActivityDetails({activity, cancelSelectActivity} : Props) {
   return (
-    <Card>
-      <Image src={`/assets/`} />
+    <Card fluid>
+      <Image src={`/assets/categoryImages/${activity.category}.jpg`} />
       <Card.Content>
-        <Card.Header>Matthew</Card.Header>
+        <Card.Header>{activity.title}</Card.Header>
         <Card.Meta>
-          <span className="date">Joined in 2015</span>
+          <span>{activity.date}</span>
         </Card.Meta>
         <Card.Description>
-          Matthew is a musician living in Nashville.
+          {activity.description}
         </Card.Description>
       </Card.Content>
       <Card.Content extra>
-        <a>
-          <Icon name="user" />
-          22 Friends
-        </a>
+         <Button.Group>
+           <Button basic color="blue" content="Edit"/>
+           <Button onClick={cancelSelectActivity} basic color="grey" content="Cancel"/>
+         </Button.Group>
       </Card.Content>
     </Card>
   );
